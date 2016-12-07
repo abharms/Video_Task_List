@@ -1,0 +1,108 @@
+<div class="container-fluid">
+
+
+        
+
+        <div class="row">
+            <div class="col-xs-2">
+                <label class="label-control">Rows on page</label>
+                <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
+                    <option [ngValue]="5">5</option>
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="15">15</option>
+                </select>
+            </div>
+            <div class="col-xs-4">
+                <div class="row">
+                    <label class="col-xs-12 label-control">Sort by</label>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <select class="form-control input-sm" [(ngModel)]="sortBy">
+                            <option ngValue="name">Name</option>
+                            <option ngValue="email">Email</option>
+                            <option ngValue="age">Age</option>
+                            <option [ngValue]="sortByWordLength">City</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <select class="form-control input-sm" [(ngModel)]="sortOrder">
+                            <option ngValue="asc">Ascending</option>
+                            <option ngValue="desc">Descending</option>
+                            <option ngValue="badValue">Bad value</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">User information</div>
+
+            <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
+                   [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                <thead>
+                <tr>
+                    <th style="width: 2.5%">
+                        <mfDefaultSorter by="clone">Clone</mfDefaultSorter>
+                    </th>
+                    <th style="width: 2.5%">
+                        <mfDefaultSorter by="view">View</mfDefaultSorter>
+                    </th>
+                    <th style="width: 10%">
+                        <mfDefaultSorter by="due">CsrId</mfDefaultSorter>
+                    </th>
+                    <th style="width: 5%">
+                        <mfDefaultSorter by="clips">StateName</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="client">Title</mfDefaultSorter>
+                    </th>
+         <!--            <th style="width: 15%">
+                        <mfDefaultSorter by="task_title">Task Title</mfDefaultSorter>
+                    </th>
+                    <th style="width: 15%">
+                        <mfDefaultSorter by="owner">Owner</mfDefaultSorter>
+                    </th>
+                    <th style="width: 15%">
+                        <mfDefaultSorter by="producer">Producer</mfDefaultSorter>
+                    </th>
+                    <th style="width: 15%">
+                        <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                    </th> -->
+
+                </tr>
+                <tr>
+                    <th colspan="5">
+                        Filter by name:
+                        <input class="form-control" [(ngModel)]="filterQuery"/>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of tasks">
+                    <td>
+                        <button (click)="remove(item)" class="btn btn-danger">x</button>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>{{item.CsrId}}</td>
+                    <td>{{item.StateName}}</td>
+                    <td>{{item.Title}}</td>
+  
+
+
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+
+</div>
